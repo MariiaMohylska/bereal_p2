@@ -17,8 +17,11 @@ class PostCell: UITableViewCell {
     @IBOutlet weak var postInfo: UILabel!
     @IBOutlet weak var postImage: UIImageView!
     @IBOutlet weak var captionLabel: UILabel!
+    @IBOutlet weak var commentsButton: UIButton!
     
     private var imageDataRequest: DataRequest?
+    
+    var didCommetsButtonTapped: (() -> Void)?
     
     override func prepareForReuse() {
         super.prepareForReuse()
@@ -66,11 +69,44 @@ class PostCell: UITableViewCell {
                     captionLabel.topAnchor.constraint(equalTo: postImage.bottomAnchor, constant: 8),
                     captionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
                     captionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
-                    captionLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8)
+                    captionLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
+                    
+                    commentsButton.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
+                    commentsButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 8),
                 ])
     }
     
     func configure(with post: Post) {
+        print("Post: \(post)")
+        
+        print("Profile post: \(post.user)")
+        print("Profile session: \(SessionManager.currentProfile)")
+        print("are profiles the same? \(post.user == SessionManager.currentProfile)")
+        
+        if post.user?.objectId != SessionManager.currentProfile?.objectId {
+            guard let currentUser = SessionManager.currentProfile,
+                  let lastPostDate = currentUser.lastUpdated,
+                  let postCreatedDate = post.createdAt else {
+                postImage.isHidden = true
+                return
+            }
+            
+            let now = Date()
+            let within24Hours = (now.timeIntervalSince(postCreatedDate) <= 24 * 60 * 60)
+            let afterMyPost = postCreatedDate > lastPostDate
+            
+            
+            print("Current photo date: \(postCreatedDate)")
+            print("Profile last updated: \(lastPostDate)")
+            print("within24H: \(within24Hours)")
+            print("afterMyPost: \(afterMyPost)")
+            
+            postImage.isHidden = !(within24Hours && afterMyPost)
+            
+        } else {
+            postImage.isHidden = false
+        }
+        
         if let user = post.user {
             userName.text = "\(user.firstName ?? "") \(user.lastName ?? "")"
         }
@@ -91,15 +127,16 @@ class PostCell: UITableViewCell {
         
         captionLabel.text = post.caption
         
-//        if let coords = post.location?.toCLLocationCoordinate2D,
-//           let createdAt = post.createdAt {
-//            
-//            getLocationString(from: coords) { place in
-//                let timeString = self.timeAgo(from: createdAt)
-//                let final = "\(place) * \(timeString)"
-//                self.postInfo.text = final
-//            }
-//        }
+        if let coords = post.location?.toCLLocationCoordinate2D,
+           let createdAt = post.createdAt {
+        
+            getLocationString(from: coords) { place in
+                let timeString = self.timeAgo(from: createdAt)
+                let final = "\(place) |  \(timeString)"
+                self.postInfo.text = final
+            }
+
+        }
         
     }
     
@@ -127,7 +164,6 @@ class PostCell: UITableViewCell {
         
         geocoder.reverseGeocodeLocation(location) { placemarks, error in
             if let placemark = placemarks?.first {
-                // можна взяти місто + штат/країну
                 let city = placemark.locality ?? ""
                 let state = placemark.administrativeArea ?? ""
                 
@@ -144,4 +180,8 @@ class PostCell: UITableViewCell {
         }
     }
 
+    
+    @IBAction func commentSectionTapped(_ sender: Any) {
+        didCommetsButtonTapped?()
+    }
 }

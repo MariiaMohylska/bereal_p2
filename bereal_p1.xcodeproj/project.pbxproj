@@ -6,6 +6,12 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		559E3BF92E8B497500D2D18B /* ParseSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 559E3BF82E8B497500D2D18B /* ParseSwift */; };
+		55D9FF092E8CABC9002502C1 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 55D9FF082E8CABC9002502C1 /* Alamofire */; };
+		55D9FF0E2E8CABD7002502C1 /* AlamofireImage in Frameworks */ = {isa = PBXBuildFile; productRef = 55D9FF0D2E8CABD7002502C1 /* AlamofireImage */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		559E3BD32E8B180800D2D18B /* bereal_p1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bereal_p1.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -36,6 +42,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				559E3BF92E8B497500D2D18B /* ParseSwift in Frameworks */,
+				55D9FF0E2E8CABD7002502C1 /* AlamofireImage in Frameworks */,
+				55D9FF092E8CABC9002502C1 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +87,9 @@
 			);
 			name = bereal_p1;
 			packageProductDependencies = (
+				559E3BF82E8B497500D2D18B /* ParseSwift */,
+				55D9FF082E8CABC9002502C1 /* Alamofire */,
+				55D9FF0D2E8CABD7002502C1 /* AlamofireImage */,
 			);
 			productName = bereal_p1;
 			productReference = 559E3BD32E8B180800D2D18B /* bereal_p1.app */;
@@ -107,6 +119,11 @@
 			);
 			mainGroup = 559E3BCA2E8B180800D2D18B;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				559E3BF72E8B497500D2D18B /* XCRemoteSwiftPackageReference "Parse-Swift" */,
+				55D9FF072E8CABC9002502C1 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				55D9FF0C2E8CABD7002502C1 /* XCRemoteSwiftPackageReference "AlamofireImage" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 559E3BD42E8B180800D2D18B /* Products */;
 			projectDirPath = "";
@@ -345,6 +362,51 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		559E3BF72E8B497500D2D18B /* XCRemoteSwiftPackageReference "Parse-Swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/netreconlab/Parse-Swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.12.3;
+			};
+		};
+		55D9FF072E8CABC9002502C1 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.10.2;
+			};
+		};
+		55D9FF0C2E8CABD7002502C1 /* XCRemoteSwiftPackageReference "AlamofireImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/AlamofireImage";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.3.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		559E3BF82E8B497500D2D18B /* ParseSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 559E3BF72E8B497500D2D18B /* XCRemoteSwiftPackageReference "Parse-Swift" */;
+			productName = ParseSwift;
+		};
+		55D9FF082E8CABC9002502C1 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 55D9FF072E8CABC9002502C1 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		55D9FF0D2E8CABD7002502C1 /* AlamofireImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 55D9FF0C2E8CABD7002502C1 /* XCRemoteSwiftPackageReference "AlamofireImage" */;
+			productName = AlamofireImage;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 559E3BCB2E8B180800D2D18B /* Project object */;
 }

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import ParseSwift
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -14,6 +15,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        Task {
+            do {
+                try await ParseSwift.initialize(applicationId: "bxTEhV3TpdLJmeHwI3gTqJpdeJkHgTM0tcUfcyCW",
+                                                clientKey: "Oe4Hr9XJkWOEJMFOmroj9515dCIdjYV3ncHUUxHY",
+                                                serverURL: URL(string: "https://parseapi.back4app.com")!)
+                print("ParseSwift initialized")
+            } catch {
+                // Handle initialization errors
+                print("Error initializing ParseSwift: \(error)")
+            }
+        }
+        
+        let hasLaunchedBefore = UserDefaults.standard.bool(forKey: "hasLaunchedBefore")
+                if !hasLaunchedBefore {
+                    UserDefaults.standard.set(true, forKey: "hasLaunchedBefore")
+                    
+                    // 🔹 Remove any cached Parse user
+                    Task {
+                        do {
+                            try await User.logout() // clears session token + cache
+                            print("Cleared cached Parse user on first launch.")
+                        } catch {
+                            print("Error clearing cached user: \(error)")
+                        }
+                    }
+                }
+        
         return true
     }
 

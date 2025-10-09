@@ -1,0 +1,33 @@
+{
+  "originHash" : "f513aaaeae572b69b151c30d224fda02cc3bd1da5e54065d920020a8575f53cb",
+  "pins" : [
+    {
+      "identity" : "alamofire",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Alamofire/Alamofire",
+      "state" : {
+        "revision" : "513364f870f6bfc468f9d2ff0a95caccc10044c5",
+        "version" : "5.10.2"
+      }
+    },
+    {
+      "identity" : "alamofireimage",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Alamofire/AlamofireImage",
+      "state" : {
+        "revision" : "1eaf3b6c6882bed10f6e7b119665599dd2329aa1",
+        "version" : "4.3.0"
+      }
+    },
+    {
+      "identity" : "parse-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/netreconlab/Parse-Swift.git",
+      "state" : {
+        "revision" : "12b8e752a21d53769b39441d02ff03261edecec8",
+        "version" : "5.12.3"
+      }
+    }
+  ],
+  "version" : 3
+}
